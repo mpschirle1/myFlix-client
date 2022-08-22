@@ -1,16 +1,26 @@
-.my-flix {
-  color: steelblue;
+.movie-card.card {
+  border: none;
+}
+
+.card-body {
+  background-color: #1a1e24;
+  color: #e8e6e3;
 }
 .my-flix {
   color: steelblue;
 }
-.my-flix {
-  color: steelblue;
+html {
+  background-color: #1a1e24;
 }
-.my-flix {
-  color: steelblue;
+
+.app-container {
+  background-color: #1a1e24;
+  color: #e8e6e3;
 }
-.my-flix {
-  color: steelblue;
+
+.btn.btn-primary {
+  background: #1c6b2b;
+  color: #e8e6e3;
+  border-color: #1c6b2b;
 }
 /*# sourceMappingURL=index.3f764291.css.map */

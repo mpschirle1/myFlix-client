@@ -1,5 +1,8 @@
-$color: steelblue;
+$primary: #1c6b2b;
+$background: #1a1e24;
+$text: #e8e6e3;
 
-.my-flix {
-  color: $color;
+.card-body {
+  background-color: $background;
+  color: $text
 }
