@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import axios from "axios";
+
 import {
   Form,
   Button,
-  Card,
-  CardGroup,
   Container,
   Col,
   Row,
+  Modal,
+  Alert,
 } from "react-bootstrap";
 
-import "./registration-view.scss";
-import axios from "axios";
-
-export function RegistrationView() {
+export function UpdateView() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -21,6 +19,11 @@ export function RegistrationView() {
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [emailErr, setEmailErr] = useState("");
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const validate = () => {
     let isReq = true;
@@ -34,8 +37,8 @@ export function RegistrationView() {
     if (!password) {
       setPasswordErr("Password Required");
       isReq = false;
-    } else if (password.length < 5) {
-      setPasswordErr("Password must be at least 5 characters long");
+    } else if (password.length < 8) {
+      setPasswordErr("Password must be at least 8 characters long");
       isReq = false;
     }
     if (!email) {
@@ -53,34 +56,59 @@ export function RegistrationView() {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
+      const token = localStorage.getItem("token");
       axios
-        .post("https://myflix-db-api.herokuapp.com/users", {
-          Username: username,
-          Password: password,
-          Email: email,
-          Birthday: birthday,
-        })
+        .put(
+          `https://myflix-db-api.herokuapp.com/users/${username}`,
+          {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((response) => {
           const data = response.data;
           console.log(data);
-          window.open("/", "_self"); // _self argument prevents opening new tab
+          setShowSuccess(true);
+          setTimeout(() => {
+            handleClose();
+            window.open(`/users/${username}`, "_self");
+          }, 2000);
         })
         .catch((e) => {
-          console.log("Error registering the user");
+          console.log("Error updating the user");
         });
-      // console.log(username, password, email, birthday);
-      // props.onRegistration(username);
     }
   };
 
   return (
-    <Container>
-      <Row className="justify-content-center">
-        <Col xs lg="8">
-          <CardGroup>
-            <Card className="mt-4">
-              <Card.Body className="px-4">
-                <Card.Title className="text-center">Please Register</Card.Title>
+    <>
+      <Button variant="link" onClick={handleShow}>
+        Click here to update user info
+      </Button>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Update User Info</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Container>
+            <Row className="justify-content-center">
+              <Col xs lg="8">
+                <Alert show={showSuccess} variant="success">
+                  <Alert.Heading>Success!</Alert.Heading>
+                </Alert>
                 <Form>
                   <Form.Group className="mb-3 mx-auto mt-4">
                     <Form.Label>Username:</Form.Label>
@@ -89,7 +117,7 @@ export function RegistrationView() {
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       required
-                      placeholder="Username"
+                      placeholder={"Username"}
                     />
                     {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
@@ -128,34 +156,25 @@ export function RegistrationView() {
                       placeholder="MM-DD-YYYY"
                     />
                   </Form.Group>
-
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Register
-                  </Button>
-
-                  <Card.Text className="text-center mb-3 mx-auto mt-4">
-                    Already have an account?{" "}
-                    <Card.Link href="/">Sign In</Card.Link>
-                  </Card.Text>
                 </Form>
-              </Card.Body>
-            </Card>
-          </CardGroup>
-        </Col>
-      </Row>
-    </Container>
+              </Col>
+            </Row>
+          </Container>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            onClick={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
-
-RegistrationView.propTypes = {
-  registered: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Password: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.string,
-  }),
-};
