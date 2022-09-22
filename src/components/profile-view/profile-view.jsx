@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-
-import { Link } from "react-router-dom";
-import { UpdateView } from "./update-view";
+import { Form, Button, Col, Row, Card } from "react-bootstrap";
+import { FavoriteCard } from "../profile-view/favorite-card";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -53,9 +49,62 @@ export class ProfileView extends React.Component {
     }/${date.getUTCDate()}/${date.getUTCFullYear()}`;
   }
 
+  updateUser(e) {
+    e.preventDefault();
+    const username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    axios
+      .put(
+        `https://myflix-db-api.herokuapp.com/users/${username}`,
+        {
+          Username: this.state.Username,
+          Password: this.state.Password,
+          Email: this.state.Email,
+          Birthday: this.state.Birthday,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        this.setState({
+          Username: response.data.Username,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday,
+        });
+        localStorage.setItem("user", this.state.Username);
+        const data = response.data;
+        console.log(data);
+        console.log(this.state.Username);
+        alert("Profile has been sucessfully updated");
+        window.open(`/users/${username}`, "_self");
+      })
+      .catch((e) => {
+        console.log("Error updating the user");
+      });
+  }
+
+  setUsername(value) {
+    this.state.Username = value;
+  }
+
+  setPassword(value) {
+    this.state.Password = value;
+  }
+
+  setEmail(value) {
+    this.state.Email = value;
+  }
+
+  setBirthday(value) {
+    this.state.Birthday = value;
+  }
+
   render() {
-    const { movies, onBackClick } = this.props;
-    const { Username, Email, Birthday, FavoriteMovies } = this.state;
+    const { movies, onBackClick, handleFavorite, favoriteMovies } = this.props;
+    const { Username, Email, Birthday } = this.state;
 
     return (
       <div className="profile-view">
@@ -64,25 +113,84 @@ export class ProfileView extends React.Component {
             <h4>{Username}</h4>
             <h5>Email: {Email}</h5>
             <h5>Birthday: {this.formatBirthday(Birthday)}</h5>
-            <p>{<UpdateView />}</p>
+            {/* <p>{<UpdateView />}</p> */}
           </Col>
         </Row>
         <Row>
-          <Col key={movies._id}>
-            <h4>Favorite Movies</h4>
-            {FavoriteMovies.map((movies) => {
-              return (
-                <div>
-                  <img src={movies.ImagePath} crossOrigin={"anonymous"} />
-                  <Link to={`/movies/${movies._id}`}>
-                    <h4>{movies.Title}</h4>
-                  </Link>
-                </div>
-              );
-            })}
+          <Col>
+            <Card>
+              <Card.Body>
+                <Card.Title>Update User Info</Card.Title>
+                <Form onSubmit={(e) => this.updateUser(e)}>
+                  <Form.Group className="mb-3 mx-auto mt-4">
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={this.Username}
+                      onChange={(e) => this.setUsername(e.target.value)}
+                      required
+                      placeholder={"Username"}
+                    />
+                    {/* {usernameErr && <p>{usernameErr}</p>} */}
+                  </Form.Group>
+
+                  <Form.Group className="mb-3 mx-auto mt-4">
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control
+                      type="password"
+                      value={this.Password}
+                      onChange={(e) => this.setPassword(e.target.value)}
+                      required
+                      minLength="8"
+                      placeholder="Password (Min 8 characters)"
+                    />
+                    {/* {passwordErr && <p>{passwordErr}</p>} */}
+                  </Form.Group>
+
+                  <Form.Group className="mb-3 mx-auto mt-4">
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control
+                      type="email"
+                      value={this.Email}
+                      onChange={(e) => this.setEmail(e.target.value)}
+                      required
+                      placeholder="someone@somewhere.com"
+                    />
+                    {/* {emailErr && <p>{emailErr}</p>} */}
+                  </Form.Group>
+
+                  <Form.Group className="mb-3 mx-auto mt-4">
+                    <Form.Label>Birthday:</Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={this.Birthday}
+                      onChange={(e) => this.setBirthday(e.target.value)}
+                      placeholder="MM-DD-YYYY"
+                    />
+                  </Form.Group>
+                  <div>
+                    <Button variant="primary" type="submit">
+                      Save Changes
+                    </Button>
+                  </div>
+                </Form>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
-
+        <Row>
+          <h3>Favorite Movies</h3>
+          {favoriteMovies.map((movieId) => {
+            let movie = movies.find((m) => m._id === movieId);
+            return (
+              <FavoriteCard
+                key={movieId}
+                movieData={movie}
+                handleFavorite={handleFavorite}
+              />
+            );
+          })}
+        </Row>
         <Row>
           <Button
             onClick={() => {

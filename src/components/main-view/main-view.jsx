@@ -25,6 +25,7 @@ class MainView extends React.Component {
     this.state = {
       movies: [],
       user: null,
+      favoriteMovies: [],
     };
   }
 
@@ -46,6 +47,8 @@ class MainView extends React.Component {
       .then((response) => {
         this.setState({
           movies: response.data,
+          user: this.state.user,
+          favoriteMovies: this.state.favoriteMovies,
         });
       })
       .catch((error) => {
@@ -53,14 +56,79 @@ class MainView extends React.Component {
       });
   }
 
+  handleFavorite(movieId, action) {
+    const { user } = this.state;
+    let favoriteMovies = this.state.favoriteMovies;
+    if (user && favoriteMovies.length === 0) {
+      let savedFavoriteMovies = localStorage.getItem("favoriteMovies");
+      if (savedFavoriteMovies) {
+        favoriteMovies = JSON.parse(savedFavoriteMovies);
+      }
+    }
+    const accessToken = localStorage.getItem("token");
+    debugger;
+    if (accessToken !== null && user !== null) {
+      if (action === "add") {
+        let updatedFavorites = [...favoriteMovies, movieId];
+        localStorage.setItem(
+          "favoriteMovies",
+          JSON.stringify(updatedFavorites)
+        );
+        this.setState({ favoriteMovies: updatedFavorites });
+        axios
+          .post(
+            `https://myflix-db-api.herokuapp.com/users/${user}/movies/${movieId}`,
+            {},
+            {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            }
+          )
+          .then((response) => {
+            console.log("Movie sucessfully added to favorite list");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (action === "remove") {
+        let updatedFavorites = favoriteMovies.filter((id) => id !== movieId);
+        localStorage.setItem(
+          "favoriteMovies",
+          JSON.stringify(updatedFavorites)
+        );
+        this.setState({
+          favoriteMovies: updatedFavorites,
+        });
+        axios
+          .delete(
+            `https://myflix-db-api.herokuapp.com/users/${user}/movies/${movieId}`,
+            {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            }
+          )
+          .then((response) => {
+            console.log("Movie successfully removed from favorite list");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+  }
+
   onLoggedIn(authData) {
     console.log(authData);
-    this.setState({
-      user: authData.user.Username,
-    });
+    const { Username, Email, Birthday, FavoriteMovies } = authData.user;
 
+    localStorage.setItem("favoriteMovies", JSON.stringify(FavoriteMovies));
+
+    this.setState({
+      user: Username,
+      favoriteMovies: FavoriteMovies || [],
+    });
     localStorage.setItem("token", authData.token);
-    localStorage.setItem("user", authData.user.Username);
+    localStorage.setItem("user", Username);
+    localStorage.setItem("email", Email);
+    localStorage.setItem("birthday", Birthday);
     this.getMovies(authData.token);
   }
 
@@ -74,7 +142,13 @@ class MainView extends React.Component {
 
   render() {
     const { movies, user } = this.state;
-
+    let favoriteMovies = this.state.favoriteMovies;
+    if (user && favoriteMovies.length === 0) {
+      let savedFavoriteMovies = localStorage.getItem("favoriteMovies");
+      if (savedFavoriteMovies) {
+        favoriteMovies = JSON.parse(savedFavoriteMovies);
+      }
+    }
     return (
       <Router>
         <Menubar user={user} />
@@ -124,6 +198,9 @@ class MainView extends React.Component {
                       (movie) => movie._id === match.params.movieId
                     )}
                     onBackClick={() => history.goBack()}
+                    handleFavorite={(movieId, action) => {
+                      this.handleFavorite.call(this, movieId, action);
+                    }}
                   />
                 </Col>
               );
@@ -191,6 +268,10 @@ class MainView extends React.Component {
                     movies={movies}
                     user={user === match.params.username}
                     onBackClick={() => history.goBack()}
+                    favoriteMovies={favoriteMovies || []}
+                    handleFavorite={(movieId, action) => {
+                      this.handleFavorite.call(this, movieId, action);
+                    }}
                   />
                 </Col>
               );
