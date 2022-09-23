@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 
 import { Link } from "react-router-dom";
@@ -13,17 +13,18 @@ export class MovieCard extends React.Component {
 
     return (
       <Card className="movie-card">
-        <Card.Img
-          variant="top"
-          crossOrigin={"anonymous"}
-          src={movieData.ImagePath}
-        />
+        <Link to={`/movies/${movieData._id}`}>
+          <Card.Img
+            variant="top"
+            crossOrigin={"anonymous"}
+            src={movieData.ImagePath}
+          />
+        </Link>
         <Card.Body>
-          <Card.Title>{movieData.Title}</Card.Title>
-          <Card.Text>{movieData.Description}</Card.Text>
-          <Link to={`/movies/${movieData._id}`}>
-            <Button variant="link">Open</Button>
-          </Link>
+          <Row className="justify-content-center mx-auto">
+            <Card.Title>{movieData.Title}</Card.Title>
+            <Card.Text>{movieData.Description}</Card.Text>
+          </Row>
         </Card.Body>
       </Card>
     );

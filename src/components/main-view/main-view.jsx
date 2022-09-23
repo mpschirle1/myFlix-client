@@ -16,7 +16,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import "./main-view.scss";
-import { useBootstrapMinBreakpoint } from "react-bootstrap/esm/ThemeProvider";
 
 class MainView extends React.Component {
   constructor() {
@@ -66,7 +65,6 @@ class MainView extends React.Component {
       }
     }
     const accessToken = localStorage.getItem("token");
-    debugger;
     if (accessToken !== null && user !== null) {
       if (action === "add") {
         let updatedFavorites = [...favoriteMovies, movieId];
@@ -198,6 +196,7 @@ class MainView extends React.Component {
                       (movie) => movie._id === match.params.movieId
                     )}
                     onBackClick={() => history.goBack()}
+                    isFavorite={favoriteMovies.includes(match.params.movieId)}
                     handleFavorite={(movieId, action) => {
                       this.handleFavorite.call(this, movieId, action);
                     }}
@@ -218,6 +217,9 @@ class MainView extends React.Component {
               return (
                 <Col className="mx-auto mt-4" md={12}>
                   <DirectorView
+                    movies={movies.filter((movie) => {
+                      return movie.Director.Name === match.params.name;
+                    })}
                     director={
                       movies.find(
                         (movie) => movie.Director.Name === match.params.name
@@ -241,6 +243,9 @@ class MainView extends React.Component {
               return (
                 <Col className="mx-auto mt-4" md={12}>
                   <GenreView
+                    movies={movies.filter((movie) => {
+                      return movie.Genre.Name === match.params.name;
+                    })}
                     genre={
                       movies.find(
                         (movie) => movie.Genre.Name === match.params.name

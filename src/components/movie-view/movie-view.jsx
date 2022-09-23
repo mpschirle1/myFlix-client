@@ -11,7 +11,7 @@ import "./movie-view.scss";
 
 export class MovieView extends React.Component {
   render() {
-    const { movie, onBackClick, handleFavorite } = this.props;
+    const { movie, onBackClick, handleFavorite, isFavorite } = this.props;
 
     return (
       <div className="movie-view">
@@ -61,6 +61,20 @@ export class MovieView extends React.Component {
             />
           </Col>
           <Col xs={12}>
+            {!isFavorite ? (
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  handleFavorite(movie._id, "add");
+                }}
+                className="float-lg-right d-flex mt-4 mx-auto"
+              >
+                Add To Favorites
+              </Button>
+            ) : (
+              <div></div>
+            )}
+
             <Button
               onClick={() => {
                 onBackClick(null);
@@ -68,14 +82,6 @@ export class MovieView extends React.Component {
               className="float-lg-left d-flex mt-4 mx-auto"
             >
               Back
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={() => {
-                handleFavorite(movie._id, "add");
-              }}
-            >
-              Add To Favorites
             </Button>
           </Col>
         </Row>

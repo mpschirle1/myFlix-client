@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import { Form, Button, Col, Row, Card } from "react-bootstrap";
-import { FavoriteCard } from "../profile-view/favorite-card";
+import { FavoriteView } from "./favorite-view";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -41,6 +41,21 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   };
+
+  deleteUser() {
+    let token = localStorage.getItem("token");
+    const username = localStorage.getItem("user");
+    axios
+      .delete(`https://myflix-db-api.herokuapp.com/users/${username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        alert("Your account has been deleted!");
+        localStorage.clear();
+        window.open("/", "_self");
+      })
+      .catch((error) => console.log(error));
+  }
 
   formatBirthday(birthday) {
     let date = new Date(birthday);
@@ -113,11 +128,10 @@ export class ProfileView extends React.Component {
             <h4>{Username}</h4>
             <h5>Email: {Email}</h5>
             <h5>Birthday: {this.formatBirthday(Birthday)}</h5>
-            {/* <p>{<UpdateView />}</p> */}
           </Col>
         </Row>
-        <Row>
-          <Col>
+        <Row className="justify-content-center mt-4">
+          <Col xs lg="8">
             <Card>
               <Card.Body>
                 <Card.Title>Update User Info</Card.Title>
@@ -169,8 +183,19 @@ export class ProfileView extends React.Component {
                     />
                   </Form.Group>
                   <div>
-                    <Button variant="primary" type="submit">
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      className="float-left mt-4"
+                    >
                       Save Changes
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => this.deleteUser()}
+                      className="float-right mt-4"
+                    >
+                      Deregister
                     </Button>
                   </div>
                 </Form>
@@ -178,25 +203,42 @@ export class ProfileView extends React.Component {
             </Card>
           </Col>
         </Row>
-        <Row>
+        <Row className="justify-content-center mt-4">
           <h3>Favorite Movies</h3>
-          {favoriteMovies.map((movieId) => {
-            let movie = movies.find((m) => m._id === movieId);
-            return (
-              <FavoriteCard
-                key={movieId}
-                movieData={movie}
-                handleFavorite={handleFavorite}
-              />
-            );
-          })}
         </Row>
+
+        {favoriteMovies.length !== 0 ? (
+          <Row>
+            {favoriteMovies.map((movieId) => {
+              let movie = movies.find((m) => m._id === movieId);
+              return (
+                <Col
+                  className="px-4 px-sm-2 mt-4"
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  key={movieId}
+                >
+                  <FavoriteView
+                    movieData={movie}
+                    handleFavorite={handleFavorite}
+                  />
+                </Col>
+              );
+            })}
+          </Row>
+        ) : (
+          <Row className="justify-content-center mt-4">
+            <h5>Your favorites list is empty!</h5>
+          </Row>
+        )}
         <Row>
           <Button
             onClick={() => {
               onBackClick(null);
             }}
-            className="float-lg-left d-flex mt-4 mx-auto"
+            className="float-lg-left d-flex mt-4 mb-4 mx-auto"
           >
             Back
           </Button>
