@@ -34,8 +34,8 @@ export function RegistrationView() {
     if (!password) {
       setPasswordErr("Password Required");
       isReq = false;
-    } else if (password.length < 5) {
-      setPasswordErr("Password must be at least 5 characters long");
+    } else if (password.length < 8) {
+      setPasswordErr("Password must be at least 8 characters long");
       isReq = false;
     }
     if (!email) {
