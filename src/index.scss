@@ -16,3 +16,23 @@ html {
   color: $text;
   border-color: $primary;
 }
+
+.accordion-button {
+  font-size: 24px;
+  background-color: $background;
+  color: $text;
+  background-color: none;
+  border: none;
+}
+
+.accordion-button:link, .accordion-button:visited, .accordion-button:hover, .accordion-button:active  {
+    color:$primary;
+    text-decoration: none; 
+    border: hidden; 
+    box-shadow: 0px;  
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  outline: 0;
+}

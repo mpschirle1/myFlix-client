@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import { Form, Button, Col, Row, Card } from "react-bootstrap";
+import { Form, Button, Col, Row, Accordion } from "react-bootstrap";
 import { FavoriteView } from "./favorite-view";
 
 export class ProfileView extends React.Component {
@@ -131,76 +131,80 @@ export class ProfileView extends React.Component {
           </Col>
         </Row>
         <Row className="justify-content-center mt-4">
-          <Col xs lg="8">
-            <Card>
-              <Card.Body>
-                <Card.Title>Update User Info</Card.Title>
-                <Form onSubmit={(e) => this.updateUser(e)}>
-                  <Form.Group className="mb-3 mx-auto mt-4">
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={this.Username}
-                      onChange={(e) => this.setUsername(e.target.value)}
-                      required
-                      placeholder={"Username"}
-                    />
-                    {/* {usernameErr && <p>{usernameErr}</p>} */}
-                  </Form.Group>
+          <Col xs lg="8" className="justify-content-center">
+            <Accordion>
+              <Accordion.Item eventKey="0">
+                <Row className="justify-content-center">
+                  <Accordion.Header>Click To Update User Info</Accordion.Header>
+                </Row>
+                <Accordion.Body>
+                  <Form onSubmit={(e) => this.updateUser(e)}>
+                    <Form.Group className="mb-3 mx-auto mt-4">
+                      <Form.Label>Username:</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={this.Username}
+                        onChange={(e) => this.setUsername(e.target.value)}
+                        required
+                        placeholder={"Username"}
+                      />
+                      {/* {usernameErr && <p>{usernameErr}</p>} */}
+                    </Form.Group>
 
-                  <Form.Group className="mb-3 mx-auto mt-4">
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                      type="password"
-                      value={this.Password}
-                      onChange={(e) => this.setPassword(e.target.value)}
-                      required
-                      minLength="8"
-                      placeholder="Password (Min 8 characters)"
-                    />
-                    {/* {passwordErr && <p>{passwordErr}</p>} */}
-                  </Form.Group>
+                    <Form.Group className="mb-3 mx-auto mt-4">
+                      <Form.Label>Password:</Form.Label>
+                      <Form.Control
+                        type="password"
+                        value={this.Password}
+                        onChange={(e) => this.setPassword(e.target.value)}
+                        required
+                        minLength="8"
+                        placeholder="Password (Min 8 characters)"
+                      />
+                      {/* {passwordErr && <p>{passwordErr}</p>} */}
+                    </Form.Group>
 
-                  <Form.Group className="mb-3 mx-auto mt-4">
-                    <Form.Label>Email:</Form.Label>
-                    <Form.Control
-                      type="email"
-                      value={this.Email}
-                      onChange={(e) => this.setEmail(e.target.value)}
-                      required
-                      placeholder="someone@somewhere.com"
-                    />
-                    {/* {emailErr && <p>{emailErr}</p>} */}
-                  </Form.Group>
+                    <Form.Group className="mb-3 mx-auto mt-4">
+                      <Form.Label>Email:</Form.Label>
+                      <Form.Control
+                        type="email"
+                        value={this.Email}
+                        onChange={(e) => this.setEmail(e.target.value)}
+                        required
+                        placeholder="someone@somewhere.com"
+                      />
+                      {/* {emailErr && <p>{emailErr}</p>} */}
+                    </Form.Group>
 
-                  <Form.Group className="mb-3 mx-auto mt-4">
-                    <Form.Label>Birthday:</Form.Label>
-                    <Form.Control
-                      type="date"
-                      value={this.Birthday}
-                      onChange={(e) => this.setBirthday(e.target.value)}
-                      placeholder="MM-DD-YYYY"
-                    />
-                  </Form.Group>
-                  <div>
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      className="float-left mt-4"
-                    >
-                      Save Changes
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => this.deleteUser()}
-                      className="float-right mt-4"
-                    >
-                      Deregister
-                    </Button>
-                  </div>
-                </Form>
-              </Card.Body>
-            </Card>
+                    <Form.Group className="mb-3 mx-auto mt-4">
+                      <Form.Label>Birthday:</Form.Label>
+                      <Form.Control
+                        type="date"
+                        value={this.Birthday}
+                        onChange={(e) => this.setBirthday(e.target.value)}
+                        placeholder="MM-DD-YYYY"
+                      />
+                    </Form.Group>
+                    <div>
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        className="float-left mt-4"
+                      >
+                        Save Changes
+                      </Button>
+                      <Button
+                        variant="danger"
+                        onClick={() => this.deleteUser()}
+                        className="float-right mt-4"
+                      >
+                        Deregister
+                      </Button>
+                    </div>
+                  </Form>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
           </Col>
         </Row>
         <Row className="justify-content-center mt-4">

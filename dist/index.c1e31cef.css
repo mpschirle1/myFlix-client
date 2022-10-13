@@ -22,4 +22,24 @@ html {
   color: #e8e6e3;
   border-color: #1c6b2b;
 }
+
+.accordion-button {
+  font-size: 24px;
+  background-color: #1a1e24;
+  color: #e8e6e3;
+  background-color: none;
+  border: none;
+}
+
+.accordion-button:link, .accordion-button:visited, .accordion-button:hover, .accordion-button:active {
+  color: #1c6b2b;
+  text-decoration: none;
+  border: hidden;
+  box-shadow: 0px;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  outline: 0;
+}
 /*# sourceMappingURL=index.c1e31cef.css.map */
