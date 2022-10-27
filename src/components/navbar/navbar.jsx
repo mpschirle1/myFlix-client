@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 import "./navbar.scss";
 
@@ -32,7 +33,7 @@ export function Menubar({ user }) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
+            {isAuth() && <Link to={`/users/${user}`}>{user}</Link>}
             {isAuth() && (
               <Button
                 variant="link"
@@ -43,8 +44,8 @@ export function Menubar({ user }) {
                 Logout
               </Button>
             )}
-            {!isAuth() && <Nav.Link href={"/"}>Sign-In</Nav.Link>}
-            {!isAuth() && <Nav.Link href="/register">Sign-Up</Nav.Link>}
+            {!isAuth() && <Link to={"/"}>Sign-In</Link>}
+            {!isAuth() && <Link to="/register">Sign-Up</Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>
