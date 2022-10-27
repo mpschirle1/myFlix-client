@@ -1,0 +1,32 @@
+$primary: #1c6b2b;
+$background: #1a1e24;
+$text: #e8e6e3;
+
+.main-nav {
+  background-color: $background;
+  opacity: 0.95;
+  filter: drop-shadow(5px 5px 10px #000);
+  a {
+    color: $text !important;
+  }
+  a:hover {
+    opacity: 0.6;
+  }
+  .btn-link {
+    color: $text;
+  }
+  .btn-link:hover {
+    color: $text;
+    text-decoration: none;
+    opacity: 0.6;
+  }
+}
+
+.navbar-logo {
+  font-family: "Rubik Dirt", cursive;
+  font-size: 1.75rem !important;
+}
+
+.navbar-logo:hover {
+  opacity: 0.6;
+}

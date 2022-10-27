@@ -1,0 +1,25 @@
+.movie-card.card {
+  border: none;
+}
+
+.card-body {
+  background-color: #1a1e24;
+  color: #e8e6e3;
+}
+
+
+html {
+  background-color: #1a1e24;
+}
+
+.app-container {
+  background-color: #1a1e24;
+  color: #e8e6e3;
+}
+
+.btn.btn-primary {
+  background: #1c6b2b;
+  color: #e8e6e3;
+  border-color: #1c6b2b;
+}
+/*# sourceMappingURL=index.3f764291.css.map */

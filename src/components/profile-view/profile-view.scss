@@ -1,0 +1,49 @@
+$primary: #1c6b2b;
+$background: #1a1e24;
+$text: #e8e6e3;
+
+.user {
+  font-family: "Rubik Dirt", cursive;
+  .back-button {
+    font-family: "Red Hat Display";
+    color: $text;
+    font-size: inherit;
+    vertical-align: revert;
+    padding-left: 0;
+  }
+  .back-button:hover {
+    color: $text;
+    text-decoration: none;
+    opacity: 0.6;
+  }
+}
+
+.update-form {
+  max-width: 500px !important;
+}
+
+.fav-movie.card {
+  border: none;
+  height: 100%;
+  filter: drop-shadow(5px 5px 5px #000);
+  .card-body {
+    background-color: $background;
+    color: $text;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+.card-img {
+  width: 100%;
+  border-top-left-radius: calc(0.5rem - 2px) !important;
+  border-top-right-radius: calc(0.5rem - 2px) !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: none;
+  opacity: 1;
+}
+
+.card-img:hover {
+  opacity: 0.8;
+}
