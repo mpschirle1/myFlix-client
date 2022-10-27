@@ -1,0 +1,21 @@
+$primary: #1c6b2b;
+$background: #1a1e24;
+$text: #e8e6e3;
+
+.registration-card {
+  padding-top: 10%;
+  max-width: 500px;
+  margin: auto;
+  filter: drop-shadow(5px 5px 10px #000);
+  .card-body {
+    background-color: $background;
+    color: $text;
+    border-radius: 5px;
+    .form-control {
+      background-color: white !important;
+      color: black !important;
+      border-style: none !important;
+      border-color: none;
+    }
+  }
+}

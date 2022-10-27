@@ -1,0 +1,46 @@
+$primary: #1c6b2b;
+$background: #1a1e24;
+$text: #e8e6e3;
+
+.movie-card.card {
+  border: none;
+  margin-bottom: 15px;
+  height: 98%;
+  max-width: 275px;
+  filter: drop-shadow(5px 5px 5px #000);
+  .card-body {
+    background-color: $background;
+    color: $text;
+    max-height: 200px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    p {
+      font-size: 10pt;
+      display: -webkit-box;
+      max-width: 275px;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+.title {
+  max-width: 275px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card-img-top {
+  width: 100%;
+  max-width: 275px;
+  height: fit-content;
+  border-top-left-radius: calc(0.5rem - 2px);
+  border-top-right-radius: calc(0.5rem - 2px);
+  opacity: 1;
+}
+
+.card-img-top:hover {
+  opacity: 0.8;
+}
