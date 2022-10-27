@@ -17,7 +17,21 @@ export class MovieView extends React.Component {
       <div className="movie-view">
         <Row>
           <Col lg={8}>
-            <h1 className="movie-title">{movie.Title}</h1>
+            <h1 className="movie-title">
+              <Button
+                className="back-button"
+                variant="link"
+                onClick={() => {
+                  onBackClick(null);
+                }}
+              >
+                <span>&#60;</span>
+              </Button>
+              {movie.Title}
+            </h1>
+            <p>
+              {movie.ReleaseYear}&nbsp;&nbsp;|&nbsp;&nbsp;{movie.Rating}
+            </p>
           </Col>
         </Row>
         <Row>
@@ -28,7 +42,7 @@ export class MovieView extends React.Component {
                   <Col lg={2} className="label">
                     <h5>Genre: </h5>
                   </Col>
-                  <Col lg={10} className="value">
+                  <Col lg={10}>
                     <Link to={`/genres/${movie.Genre.Name}`}>
                       <Button variant="link">{movie.Genre.Name}</Button>
                     </Link>
@@ -40,7 +54,7 @@ export class MovieView extends React.Component {
                   <Col lg={2} className="label">
                     <h5>Director: </h5>
                   </Col>
-                  <Col lg={10} className="value">
+                  <Col lg={10}>
                     <Link to={`/directors/${movie.Director.Name}`}>
                       <Button variant="link">{movie.Director.Name}</Button>
                     </Link>
@@ -50,6 +64,8 @@ export class MovieView extends React.Component {
               <Col xs={12} className="movie-description mt-4">
                 <h5 className="label">Description</h5>
                 <div className="value">{movie.Description}</div>
+                <h5 className="mt-4">Starring</h5>
+                <p>{movie.Actors.join(", ")}</p>
               </Col>
             </Row>
           </Col>
@@ -63,26 +79,17 @@ export class MovieView extends React.Component {
           <Col xs={12}>
             {!isFavorite ? (
               <Button
-                variant="secondary"
+                variant="primary"
                 onClick={() => {
                   handleFavorite(movie._id, "add");
                 }}
-                className="float-lg-right d-flex mt-4 mx-auto"
+                className="float-lg-right d-flex mt-4 mb-4 mx-auto"
               >
                 Add To Favorites
               </Button>
             ) : (
               <div></div>
             )}
-
-            <Button
-              onClick={() => {
-                onBackClick(null);
-              }}
-              className="float-lg-left d-flex mt-4 mx-auto"
-            >
-              Back
-            </Button>
           </Col>
         </Row>
       </div>

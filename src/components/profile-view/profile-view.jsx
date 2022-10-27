@@ -4,6 +4,8 @@ import axios from "axios";
 import { Form, Button, Col, Row, Accordion } from "react-bootstrap";
 import { FavoriteView } from "./favorite-view";
 
+import "./profile-view.scss";
+
 export class ProfileView extends React.Component {
   constructor() {
     super();
@@ -122,16 +124,27 @@ export class ProfileView extends React.Component {
     const { Username, Email, Birthday } = this.state;
 
     return (
-      <div className="profile-view">
+      <div>
         <Row>
           <Col>
-            <h4>{Username}</h4>
+            <h2 className="user">
+              <Button
+                className="back-button"
+                variant="link"
+                onClick={() => {
+                  onBackClick(null);
+                }}
+              >
+                <span>&#60;</span>
+              </Button>
+              {Username}
+            </h2>
             <h5>Email: {Email}</h5>
             <h5>Birthday: {this.formatBirthday(Birthday)}</h5>
           </Col>
         </Row>
-        <Row className="justify-content-center mt-4">
-          <Col xs lg="8" className="justify-content-center">
+        <Row className="mt-4 justify-content-center">
+          <Col xs lg="8" className="update-form">
             <Accordion>
               <Accordion.Item eventKey="0">
                 <Row className="justify-content-center">
@@ -189,14 +202,14 @@ export class ProfileView extends React.Component {
                       <Button
                         variant="primary"
                         type="submit"
-                        className="float-left mt-4"
+                        className="float-left mt-4 mb-3"
                       >
                         Save Changes
                       </Button>
                       <Button
                         variant="danger"
                         onClick={() => this.deleteUser()}
-                        className="float-right mt-4"
+                        className="float-right mt-4 mb-3"
                       >
                         Deregister
                       </Button>
@@ -207,7 +220,7 @@ export class ProfileView extends React.Component {
             </Accordion>
           </Col>
         </Row>
-        <Row className="justify-content-center mt-4">
+        <Row className="justify-content-center mt-4 mb-4">
           <h3>Favorite Movies</h3>
         </Row>
 
@@ -217,8 +230,8 @@ export class ProfileView extends React.Component {
               let movie = movies.find((m) => m._id === movieId);
               return (
                 <Col
-                  className="px-4 px-sm-2 mt-4"
-                  xs={12}
+                  className="px-2 mt-2 mb-4"
+                  xs={6}
                   sm={6}
                   md={4}
                   lg={3}
@@ -233,20 +246,10 @@ export class ProfileView extends React.Component {
             })}
           </Row>
         ) : (
-          <Row className="justify-content-center mt-4">
+          <Row className="justify-content-center mt-4 mb-4">
             <h5>Your favorites list is empty!</h5>
           </Row>
         )}
-        <Row>
-          <Button
-            onClick={() => {
-              onBackClick(null);
-            }}
-            className="float-lg-left d-flex mt-4 mb-4 mx-auto"
-          >
-            Back
-          </Button>
-        </Row>
       </div>
     );
   }

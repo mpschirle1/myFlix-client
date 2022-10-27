@@ -22,7 +22,7 @@ export class MovieCard extends React.Component {
         </Link>
         <Card.Body>
           <Row className="justify-content-center mx-auto">
-            <Card.Title>{movieData.Title}</Card.Title>
+            <Card.Title className="title">{movieData.Title}</Card.Title>
             <Card.Text>{movieData.Description}</Card.Text>
           </Row>
         </Card.Body>

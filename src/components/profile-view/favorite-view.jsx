@@ -7,7 +7,7 @@ export class FavoriteView extends React.Component {
     const { movieData, handleFavorite } = this.props;
     return (
       <>
-        <Card>
+        <Card className="fav-movie">
           <Link to={`/movies/${movieData._id}`}>
             <Card.Img crossOrigin={"anonymous"} src={movieData.ImagePath} />
           </Link>
@@ -16,9 +16,10 @@ export class FavoriteView extends React.Component {
               <h5>{movieData.Title}</h5>
             </Row>
             <Button
-              variant="danger"
+              variant="outline-danger"
+              size="sm"
               onClick={() => handleFavorite(movieData._id, "remove")}
-              className="d-flex mt-4 mx-auto"
+              className="d-flex mx-auto mt-3"
             >
               Remove
             </Button>

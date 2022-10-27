@@ -1,45 +1,333 @@
+.movie-title {
+  font-family: "Rubik Dirt", cursive;
+  font-size: 2rem !important;
+}
+.movie-title .back-button {
+  font-family: "Red Hat Display";
+  color: #e8e6e3;
+  font-size: inherit;
+  vertical-align: revert;
+  padding-left: 0;
+}
+.movie-title .back-button:hover {
+  color: #e8e6e3;
+  text-decoration: none;
+  opacity: 0.6;
+}
 
-.card-body {
+.movie-poster {
+  filter: drop-shadow(5px 5px 5px #000);
+}
+.movie-poster img {
+  border-radius: calc(0.5rem - 2px);
+  max-width: 250px;
+}
+
+.movie-genre .btn-link {
+  color: #e8e6e3;
+  margin-block-start: auto;
+  font-size: 1rem !important;
+}
+.movie-genre .btn-link:hover {
+  color: #e8e6e3;
+  opacity: 0.6;
+  text-decoration: none;
+}
+.movie-genre .label {
+  margin-block-start: auto;
+}
+
+.movie-director .btn-link {
+  color: #e8e6e3;
+  margin-block-start: auto;
+  font-size: 1rem !important;
+}
+.movie-director .btn-link:hover {
+  color: #e8e6e3;
+  opacity: 0.6;
+  text-decoration: none;
+}
+.movie-director .label {
+  margin-block-start: auto;
+}
+.login-card {
+  padding-top: 25%;
+  max-width: 500px;
+  margin: auto;
+  filter: drop-shadow(5px 5px 10px #000);
+}
+.login-card .card-body {
   background-color: #1a1e24;
   color: #e8e6e3;
+  border-radius: 5px;
+}
+.login-card .card-body .form-control {
+  background-color: white !important;
+  color: black !important;
+  border-style: none !important;
+  border-color: none;
+}
+.registration-card {
+  padding-top: 10%;
+  max-width: 500px;
+  margin: auto;
+  filter: drop-shadow(5px 5px 10px #000);
+}
+.registration-card .card-body {
+  background-color: #1a1e24;
+  color: #e8e6e3;
+  border-radius: 5px;
+}
+.registration-card .card-body .form-control {
+  background-color: white !important;
+  color: black !important;
+  border-style: none !important;
+  border-color: none;
 }
 
+.main-nav {
+  background-color: #1a1e24;
+  opacity: 0.95;
+  filter: drop-shadow(5px 5px 10px #000);
+}
+.main-nav a {
+  color: #e8e6e3 !important;
+}
+.main-nav a:hover {
+  opacity: 0.6;
+}
+.main-nav .btn-link {
+  color: #e8e6e3;
+}
+.main-nav .btn-link:hover {
+  color: #e8e6e3;
+  text-decoration: none;
+  opacity: 0.6;
+}
 
+.navbar-logo {
+  font-family: "Rubik Dirt", cursive;
+  font-size: 1.75rem !important;
+}
+
+.navbar-logo:hover {
+  opacity: 0.6;
+}
 .movie-card.card {
   border: none;
+  margin-bottom: 15px;
+  height: 98%;
+  max-width: 275px;
+  filter: drop-shadow(5px 5px 5px #000);
 }
-html {
+.movie-card.card .card-body {
   background-color: #1a1e24;
+  color: #e8e6e3;
+  max-height: 200px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.movie-card.card .card-body p {
+  font-size: 10pt;
+  display: -webkit-box;
+  max-width: 275px;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.title {
+  max-width: 275px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card-img-top {
+  width: 100%;
+  max-width: 275px;
+  height: fit-content;
+  border-top-left-radius: calc(0.5rem - 2px);
+  border-top-right-radius: calc(0.5rem - 2px);
+  opacity: 1;
+}
+
+.card-img-top:hover {
+  opacity: 0.8;
+}
+.genre-name {
+  font-family: "Rubik Dirt", cursive;
+}
+.genre-name .back-button {
+  font-family: "Red Hat Display";
+  color: #e8e6e3;
+  font-size: inherit;
+  vertical-align: revert;
+  padding-left: 0;
+}
+.genre-name .back-button:hover {
+  color: #e8e6e3;
+  text-decoration: none;
+  opacity: 0.6;
+}
+.director-name {
+  font-family: "Rubik Dirt", cursive;
+}
+.director-name .back-button {
+  font-family: "Red Hat Display";
+  color: #e8e6e3;
+  font-size: inherit;
+  vertical-align: revert;
+  padding-left: 0;
+}
+.director-name .back-button:hover {
+  color: #e8e6e3;
+  text-decoration: none;
+  opacity: 0.6;
+}
+.user {
+  font-family: "Rubik Dirt", cursive;
+}
+.user .back-button {
+  font-family: "Red Hat Display";
+  color: #e8e6e3;
+  font-size: inherit;
+  vertical-align: revert;
+  padding-left: 0;
+}
+.user .back-button:hover {
+  color: #e8e6e3;
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+.update-form {
+  max-width: 500px !important;
+}
+
+.fav-movie.card {
+  border: none;
+  height: 100%;
+  filter: drop-shadow(5px 5px 5px #000);
+}
+.fav-movie.card .card-body {
+  background-color: #1a1e24;
+  color: #e8e6e3;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.card-img {
+  width: 100%;
+  border-top-left-radius: calc(0.5rem - 2px) !important;
+  border-top-right-radius: calc(0.5rem - 2px) !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: none;
+  opacity: 1;
+}
+
+.card-img:hover {
+  opacity: 0.8;
+}
+
+body {
+  font-family: "Red Hat Display", sans-serif !important;
 }
 
 .app-container {
-  background-color: #1a1e24;
+  background: linear-gradient(45deg, #1c6b2b, #004f87, #008765, #2a315d);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
   color: #e8e6e3;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: auto;
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 .btn.btn-primary {
+  background: #1a1e24;
+  color: #e8e6e3;
+  border-color: #1a1e24;
+  filter: drop-shadow(2px 2px 2px #000);
+}
+
+.btn.btn-primary:hover {
+  background: #1a1e24;
+  border-color: #1a1e24;
+  opacity: 0.7;
+  transition: 200ms;
+}
+
+.btn.btn-secondary {
   background: #1c6b2b;
   color: #e8e6e3;
   border-color: #1c6b2b;
+  filter: drop-shadow(2px 2px 2px #000);
+}
+
+.btn.btn-secondary:hover {
+  background: #1c6b2b;
+  border-color: #1c6b2b;
+  opacity: 0.7;
+  transition: 200ms;
+}
+
+.btn.btn-danger {
+  filter: drop-shadow(2px 2px 2px #000);
+}
+
+.btn.btn-secondary:hover {
+  opacity: 0.7;
+  transition: 200ms;
 }
 
 .accordion-button {
   font-size: 24px;
-  background-color: #1a1e24;
+  background-color: transparent;
   color: #e8e6e3;
-  background-color: none;
   border: none;
 }
 
-.accordion-button:link, .accordion-button:visited, .accordion-button:hover, .accordion-button:active {
-  color: #1c6b2b;
+.accordion-button:link,
+.accordion-button:visited,
+.accordion-button:hover,
+.accordion-button:active {
+  color: #e8e6e3;
   text-decoration: none;
   border: hidden;
   box-shadow: 0px;
+  opacity: 0.6;
 }
 
 .accordion-button:focus {
   box-shadow: none;
   outline: 0;
+}
+
+.card {
+  background: transparent !important;
+}
+
+.form-control {
+  filter: drop-shadow(2px 2px 2px #000);
+  border-radius: 25px !important;
+  color: #e8e6e3 !important;
+  background-color: #1a1e24 !important;
+  border-style: none !important;
+  border-color: none;
 }
 /*# sourceMappingURL=index.c1e31cef.css.map */

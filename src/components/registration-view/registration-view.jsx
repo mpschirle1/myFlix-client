@@ -77,7 +77,7 @@ export function RegistrationView() {
     <Container>
       <Row className="justify-content-center">
         <Col xs lg="8">
-          <CardGroup>
+          <CardGroup className="registration-card">
             <Card className="mt-4">
               <Card.Body className="px-4">
                 <Card.Title className="text-center">Please Register</Card.Title>
@@ -129,17 +129,19 @@ export function RegistrationView() {
                     />
                   </Form.Group>
 
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Register
-                  </Button>
+                  <Row className="mt-4 justify-content-center">
+                    <Button
+                      variant="secondary"
+                      type="submit"
+                      onClick={handleSubmit}
+                    >
+                      Register
+                    </Button>
+                  </Row>
 
                   <Card.Text className="text-center mb-3 mx-auto mt-4">
                     Already have an account?{" "}
-                    <Card.Link href="/">Sign In</Card.Link>
+                    <Card.Link href="/">Sign in here.</Card.Link>
                   </Card.Text>
                 </Form>
               </Card.Body>

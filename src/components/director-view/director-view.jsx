@@ -5,22 +5,37 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { MovieCard } from "../movie-card/movie-card";
 
+import "./director-view.scss";
+
 export class DirectorView extends React.Component {
   render() {
     const { director, onBackClick, movies } = this.props;
 
     return (
-      <div className="director-view">
+      <div>
         <Row>
           <Col>
-            <h1 className="director-name">{director.Name}</h1>
-            <h5>Born in {director.Birth}</h5>
+            <h1 className="director-name">
+              <Button
+                className="back-button"
+                variant="link"
+                onClick={() => {
+                  onBackClick(null);
+                }}
+              >
+                <span>&#60;</span>
+              </Button>
+              {director.Name}
+            </h1>
+            <h5>
+              {director.Birth} &#8212; {director.Death}
+            </h5>
           </Col>
         </Row>
         <Row>
           <Col xs={12} className="director-bio mt-4">
-            <h5 className="label">Biography</h5>
-            <div className="value">{director.Bio}</div>
+            <h5 className="label mb-4">Biography</h5>
+            <div className="value mb-4">{director.Bio}</div>
           </Col>
           {movies.map((movie) => (
             <Col
@@ -34,16 +49,6 @@ export class DirectorView extends React.Component {
               <MovieCard movieData={movie} />
             </Col>
           ))}
-        </Row>
-        <Row>
-          <Button
-            onClick={() => {
-              onBackClick(null);
-            }}
-            className="float-lg-left d-flex mt-4 mx-auto"
-          >
-            Back
-          </Button>
         </Row>
       </div>
     );

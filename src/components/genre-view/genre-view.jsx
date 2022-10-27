@@ -5,21 +5,34 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { MovieCard } from "../movie-card/movie-card";
 
+import "./genre-view.scss";
+
 export class GenreView extends React.Component {
   render() {
     const { genre, onBackClick, movies } = this.props;
 
     return (
-      <div className="genre-view">
+      <div>
         <Row>
           <Col>
-            <h1 className="genre-name">{genre.Name}</h1>
+            <h1 className="genre-name pb-4">
+              <Button
+                className="back-button"
+                variant="link"
+                onClick={() => {
+                  onBackClick(null);
+                }}
+              >
+                <span>&#60;</span>
+              </Button>
+              {genre.Name}
+            </h1>
           </Col>
         </Row>
         <Row>
-          <Col xs={12} className="genre-description mt-4">
-            <h5 className="label">Description</h5>
-            <div className="value">{genre.Description}</div>
+          <Col xs={12}>
+            <h5 className="label pb-4">Description</h5>
+            <div className="value pb-4">{genre.Description}</div>
           </Col>
           {movies.map((movie) => (
             <Col
@@ -33,16 +46,6 @@ export class GenreView extends React.Component {
               <MovieCard movieData={movie} />
             </Col>
           ))}
-          <Col xs={12}>
-            <Button
-              onClick={() => {
-                onBackClick(null);
-              }}
-              className="float-lg-left d-flex mt-4 mx-auto"
-            >
-              Back
-            </Button>
-          </Col>
         </Row>
       </div>
     );

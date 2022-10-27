@@ -11,6 +11,8 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
+import "./login-view.scss";
+
 export function LoginView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -52,6 +54,7 @@ export function LoginView(props) {
         })
         .catch((e) => {
           console.log(e);
+          alert("Invalid Username/Password");
         });
     }
   };
@@ -60,7 +63,7 @@ export function LoginView(props) {
     <Container>
       <Row className="justify-content-center">
         <Col xs lg="8">
-          <CardGroup>
+          <CardGroup className="login-card">
             <Card className="mt-4">
               <Card.Body className="px-4">
                 <Card.Title className="text-center">Please Log In</Card.Title>
@@ -87,17 +90,19 @@ export function LoginView(props) {
                     {passwordErr && <p>{passwordErr}</p>}
                   </Form.Group>
 
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
+                  <Row className="mt-4 justify-content-center">
+                    <Button
+                      variant="secondary"
+                      type="submit"
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  </Row>
 
                   <Card.Text className="text-center mb-3 mx-auto mt-4">
-                    New user? Please{" "}
-                    <Card.Link href="/register">Register</Card.Link>
+                    New user?{" "}
+                    <Card.Link href="/register">Sign up here.</Card.Link>
                   </Card.Text>
                 </Form>
               </Card.Body>
