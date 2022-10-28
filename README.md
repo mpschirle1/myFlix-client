@@ -1,6 +1,6 @@
 # myFlix Client React Application
 
-![Application Screenshot](myflix-screenshot.png)
+![Application Screenshot](/myflix/myflix-screenshot.png)
 
 ## About
 
