@@ -27,6 +27,13 @@ export function Menubar({ user }) {
     <Navbar className="main-nav" sticky="top" expand="lg" variant="dark">
       <Container>
         <Navbar.Brand className="navbar-logo" href="/">
+          <img
+            alt="myflix logo"
+            src="/myflix-logo.png"
+            width="45"
+            height="45"
+            className="d-inline-block align-center"
+          />{" "}
           myFlix
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
