@@ -2,6 +2,10 @@
 
 ![Application Screenshot](/myflix/myflix-screenshot.png)
 
+### Application Link
+
+Live Demo: [myFlix React Client](https://myflix-react-application.netlify.app/)
+
 ## About
 
 This is the client-side for an application called myFlix based on its existing server-side code (REST API and database). This SPA uses the MERN stack and allows users to view information about movies, genres and directors. Users are able to register, add or remove movies from their favorites, and update their profile information.
@@ -25,8 +29,3 @@ This is the client-side for an application called myFlix based on its existing s
 "sass": "^1.55.0",
 "web-vitals": "^2.1.4"
 </pre>
-
-### Application Link
-
-myFlix App (https://myflix-react-application.netlify.app/)
-
